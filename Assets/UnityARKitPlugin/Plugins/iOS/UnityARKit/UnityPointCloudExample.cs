@@ -9,7 +9,7 @@ public class UnityPointCloudExample : MonoBehaviour
 {
     public uint numPointsToShow = 100;
     public GameObject PointCloudPrefab = null;
-	public List<GameObject> pointCloudObjects;
+    public List<GameObject> pointCloudObjects;
     private Vector3[] m_PointCloudData;
 
     public void Start()

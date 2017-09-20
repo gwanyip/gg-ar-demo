@@ -133,14 +133,14 @@ RectTransform:
   m_GameObject: {fileID: 14116172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1066021, y: 0.1066021, z: 0.1066021}
+  m_LocalScale: {x: 0.27409858, y: 0.2740986, z: 0.2740986}
   m_Children: []
   m_Father: {fileID: 1356711189}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000002861, y: -166.7}
+  m_AnchoredPosition: {x: -0.000002861, y: -456}
   m_SizeDelta: {x: 600, y: 198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14116174
@@ -207,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000030994, y: 34.6}
-  m_SizeDelta: {x: 204.1, y: 101.06}
+  m_AnchoredPosition: {x: 0, y: 16}
+  m_SizeDelta: {x: 552.1, y: 217.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15471096
 MonoBehaviour:
@@ -231,11 +231,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e1581325cb84e0b45875499fe3358e54, type: 3}
-    m_FontSize: 24
+    m_FontSize: 62
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 62
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -710,14 +710,14 @@ RectTransform:
   m_GameObject: {fileID: 1777653355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.17701682, y: 0.17701653, z: 0.17701653}
+  m_LocalScale: {x: 0.76496214, y: 0.76496077, z: 0.76496077}
   m_Children: []
   m_Father: {fileID: 1356711189}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 106}
+  m_AnchoredPosition: {x: 0, y: 262}
   m_SizeDelta: {x: 500, y: 185}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777653357
