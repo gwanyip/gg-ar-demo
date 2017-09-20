@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0896f9fb263a34ca48a8edd9f1e8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 10
+  delay: 5
   m_LoadLevelName: 02_CatList
 --- !u!4 &1515845143
 Transform:

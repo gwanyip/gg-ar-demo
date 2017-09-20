@@ -22,8 +22,8 @@ public class SceneLoader : MonoBehaviour {
         SceneManager.LoadScene(m_LoadLevelName, LoadSceneMode.Single);
     }
 
-    public void SceneSelection() {
-        Debug.Log("Loading next scene " + m_LoadLevelName);
-        SceneManager.LoadScene(m_LoadLevelName, LoadSceneMode.Single);
+    public void SceneSelection(string level) {
+        Debug.Log("Loading next scene " + level);
+        SceneManager.LoadScene(level, LoadSceneMode.Single);
     }
 }
