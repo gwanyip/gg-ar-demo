@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 33aacdcca4a9d1d45a913195c2b295cc
   - enabled: 1
     path: Assets/_Scenes/04_ARKitProdDemo.unity
-    guid: c5fd9cb1c03d61147b95137db78bf7ab
+    guid: a869b071cc1da4b9a95fce44a7e0d807
   - enabled: 1
     path: Assets/_Scenes/05_VuforiaProdDemo.unity
     guid: 15622cd77b77e1c49a69545816600b34
