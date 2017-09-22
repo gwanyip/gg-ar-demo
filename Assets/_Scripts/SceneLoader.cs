@@ -26,4 +26,10 @@ public class SceneLoader : MonoBehaviour {
         Debug.Log("Loading next scene " + level);
         SceneManager.LoadScene(level, LoadSceneMode.Single);
     }
+
+    public void OutboundLink(string url)
+    {
+        Debug.Log("Linking to  " + url);
+        Application.OpenURL(url);
+    }
 }

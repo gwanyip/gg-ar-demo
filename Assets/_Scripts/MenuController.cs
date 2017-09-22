@@ -5,22 +5,29 @@ using UnityEngine;
 public class MenuController : MonoBehaviour {
 
     private Animator menuAnimator;
+    private bool isMenuOpen;
 
-	// Use this for initialization
-	void Start () {        
+    // Use this for initialization
+    void Start () {        
         menuAnimator = GetComponent<Animator>();
         ResetMenu();
+        isMenuOpen = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyUp(KeyCode.B)) {
-            Debug.Log("Menu Open btn press");
-            OpenMenu();
+            Debug.Log("Toggle Button");
+            ToggleButton();
         }
-        if (Input.GetKeyUp(KeyCode.N))
-        {
-            Debug.Log("Menu Open btn close");
+    }
+
+    public void ToggleButton() {        
+        if (!isMenuOpen) {
+            isMenuOpen = true;
+            OpenMenu();
+        } else if (isMenuOpen) {
+            isMenuOpen = false;
             CloseMenu();
         }
     }
