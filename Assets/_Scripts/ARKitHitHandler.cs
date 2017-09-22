@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
+using UnityEngine.EventSystems;
 
 public class ARKitHitHandler : MonoBehaviour
 {
@@ -26,35 +27,37 @@ public class ARKitHitHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.touchCount > 0 && m_HitTransform != null)
-		{
-			var touch = Input.GetTouch(0);
-			if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+		if (!EventSystem.current.IsPointerOverGameObject (Input.GetTouch (0).fingerId)) {
+			if (Input.touchCount > 0 && m_HitTransform != null)
 			{
-				var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-				ARPoint point = new ARPoint {
-					x = screenPosition.x,
-					y = screenPosition.y
-				};
+				var touch = Input.GetTouch(0);
+				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+				{
+					var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+					ARPoint point = new ARPoint {
+						x = screenPosition.x,
+						y = screenPosition.y
+					};
 
-				m_ARSceneManager.RenderObject ();
+					m_ARSceneManager.RenderObject ();
 
-                // prioritize reults types
-                ARHitTestResultType[] resultTypes = {
-                ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
-                // if you want to use infinite planes use this:
-                //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
-                ARHitTestResultType.ARHitTestResultTypeHorizontalPlane, 
-                ARHitTestResultType.ARHitTestResultTypeFeaturePoint
-                }; 
-					
-                foreach (ARHitTestResultType resultType in resultTypes)
-                {
-                    if (HitTestWithResultType (point, resultType))
-                    {
-                        return;
-                    }
-                }
+					// prioritize reults types
+					ARHitTestResultType[] resultTypes = {
+						ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
+						// if you want to use infinite planes use this:
+						//ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+						ARHitTestResultType.ARHitTestResultTypeHorizontalPlane, 
+						ARHitTestResultType.ARHitTestResultTypeFeaturePoint
+					}; 
+
+					foreach (ARHitTestResultType resultType in resultTypes)
+					{
+						if (HitTestWithResultType (point, resultType))
+						{
+							return;
+						}
+					}
+				}
 			}
 		}
 	}
