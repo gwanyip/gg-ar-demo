@@ -23,7 +23,7 @@ public class ScreenShotMger : MonoBehaviour {
         // Loading image to texture
         newTexture2D = LoadPNG(filePath);
         // Instantiating plane screenshot prefab
-        screenShot = Instantiate(planePrefab, Camera.main.transform.position + Camera.main.transform.forward * 2f, Quaternion.identity);
+        screenShot = Instantiate(planePrefab, Camera.main.transform.position + Camera.main.transform.forward * 2f, Quaternion.Euler(0, -180, 0));
         Debug.Log("Screenshot " + screenShot);
         // Applying new texture to instantiated prefab main texture
         screenShot.GetComponent<Renderer>().material.mainTexture = newTexture2D;
