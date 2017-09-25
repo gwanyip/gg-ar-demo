@@ -9,6 +9,15 @@ public class ScreenShotMger : MonoBehaviour {
     public Texture2D newTexture2D;
     public GameObject planePrefab;
     public GameObject screenShot;
+    public GameObject screenShotCamGO;
+    public Camera screenShotcam;
+
+    private void Start()
+    {
+        screenShotCamGO = GameObject.FindGameObjectWithTag("ScreenShotCamera");
+        screenShotcam = screenShotCamGO.GetComponent<Camera>();
+        screenShotcam.enabled = false;
+    }
 
     public void AccessFileFromDir(string path)
     {
@@ -22,9 +31,12 @@ public class ScreenShotMger : MonoBehaviour {
         Debug.Log("In ApplyNewTexture, filePath is " + filePath);
         // Loading image to texture
         newTexture2D = LoadPNG(filePath);
+        // Switch from AR Camera to Screenshot Camera
+        Camera.main.enabled = false;
+        screenShotcam.enabled = true;
         // Instantiating plane screenshot prefab
-        screenShot = Instantiate(planePrefab, Camera.main.transform.position + Camera.main.transform.forward * 2f, Quaternion.Euler(0, -180, 0));
-        Debug.Log("Screenshot " + screenShot);
+        screenShot = Instantiate(planePrefab, screenShotcam.transform.position + screenShotcam.transform.forward * 0.5f, Quaternion.Euler(90, -180, 0));
+        // Debug.Log("Screenshot " + screenShot);
         // Applying new texture to instantiated prefab main texture
         screenShot.GetComponent<Renderer>().material.mainTexture = newTexture2D;
         // Applying image to new texture
@@ -45,6 +57,10 @@ public class ScreenShotMger : MonoBehaviour {
             tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
         }
         return tex;
+    }
+
+    public void SwitchCams() {
+        
     }
 
 }
