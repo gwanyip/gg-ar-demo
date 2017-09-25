@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CaptureAndSaveCamera : MonoBehaviour {
 	
-#if UNITY_5
+	#if UNITY_5_3_OR_NEWER
 
 	CaptureAndSave snapShot ;
 
