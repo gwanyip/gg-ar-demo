@@ -28,6 +28,12 @@ public class ScreenShotMger : MonoBehaviour {
     }
 
     public void ApplyNewTexture(string filePath) {
+
+        float height = (screenShotcam.orthographicSize * 2.0f) / 10f;
+        Debug.Log(height);
+        float width = height * Screen.width / Screen.height;
+        Debug.Log(width);
+
         Debug.Log("In ApplyNewTexture, filePath is " + filePath);
         // Loading image to texture
         newTexture2D = LoadPNG(filePath);
@@ -36,7 +42,11 @@ public class ScreenShotMger : MonoBehaviour {
         screenShotcam.enabled = true;
         // Instantiating plane screenshot prefab
         screenShot = Instantiate(planePrefab, screenShotcam.transform.position + screenShotcam.transform.forward * 0.5f, Quaternion.Euler(90, -180, 0));
-        // Debug.Log("Screenshot " + screenShot);
+        Debug.Log("Original Scale " + screenShot.transform.localScale);
+        screenShot.transform.localScale = new Vector3(width, 1f, height);
+        Debug.Log("Updated Scale " + screenShot.transform.localScale);
+
+        Debug.Log("Screenshot width " + screenShot);
         // Applying new texture to instantiated prefab main texture
         screenShot.GetComponent<Renderer>().material.mainTexture = newTexture2D;
         // Applying image to new texture

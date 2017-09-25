@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filePath: 
   newTexture2D: {fileID: 0}
-  planePrefab: {fileID: 1754433183223570, guid: 39a77dbf1785dfc4992a7fc0f1532c7d,
+  planePrefab: {fileID: 1324025035990652, guid: 66adc79b34e5b814d8cb0578fff634b3,
     type: 2}
   screenShot: {fileID: 0}
   screenShotCamGO: {fileID: 0}
