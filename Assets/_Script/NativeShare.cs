@@ -9,6 +9,11 @@ public class NativeShare : MonoBehaviour
 
     public ScreenShotMger screenShot;
 
+    private void Start()
+    {
+        screenShot = GameObject.FindObjectOfType<ScreenShotMger>().GetComponent<ScreenShotMger>();
+    }
+
     public void ShareScreenshotWithText()
     {
         // Share();
@@ -33,6 +38,7 @@ public class NativeShare : MonoBehaviour
             yield return new WaitForEndOfFrame();
             // Assigning file path of screenshot
             string screenShotPath = screenShot.filePath;
+            Debug.Log("screenShotPath in NativeShare is " + screenShotPath);
             yield return new WaitForSeconds(1f);
             // Game.instance.showLoading ();
             if(!Application.isEditor)

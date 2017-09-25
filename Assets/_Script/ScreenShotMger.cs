@@ -16,6 +16,7 @@ public class ScreenShotMger : MonoBehaviour {
     private NativeShare nativeShare;
     private GameObject screenShotCamGO;
     private GameObject arCameGO;
+    private Canvas uiCanvas;
 
     private void Start()
     {
@@ -29,22 +30,21 @@ public class ScreenShotMger : MonoBehaviour {
         arCam = arCameGO.GetComponent<Camera>();
         arCam.enabled = true;
 
+        // Getting UI Canvas
+        uiCanvas = GameObject.FindGameObjectWithTag("UI").GetComponent<Canvas>();
+
         // Getting CaptureScreenShot locally
         captureScreenShot = GameObject.FindObjectOfType<CaptureScreenShot>();
 
         // Storing NativeShare locally
         nativeShare = GameObject.FindObjectOfType<NativeShare>();
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            TakeScreenShot();
-        }
-        if (Input.GetKeyUp(KeyCode.N))
-        {
-            DestroyScreenShot();
+        if (Input.GetKeyUp(KeyCode.B)) {
+            ToggleCanvas("on");
         }
     }
 
@@ -65,7 +65,7 @@ public class ScreenShotMger : MonoBehaviour {
     {
         // This function stores the file path from CaptureScreenShot locally
         filePath = path;
-        Debug.Log("Filepath is " + filePath);
+        Debug.Log("Filepath in ScreenShotMger is  " + filePath);
         ApplyNewTexture(filePath);
     }
 
@@ -117,6 +117,18 @@ public class ScreenShotMger : MonoBehaviour {
         else if (cam == "shot") {
             arCam.enabled = false;
             screenShotcam.enabled = true;
+        }
+    }
+
+    public void ToggleCanvas(string state)
+    {
+        if (state == "on")
+        {
+            uiCanvas.enabled = true;
+        }
+        else if (state == "off")
+        {
+            uiCanvas.enabled = false;
         }
     }
 

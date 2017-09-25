@@ -18,8 +18,7 @@ public class CaptureScreenShot : MonoBehaviour
     private string screenShotAblumName;
     private string screenShotFilename;
     private Texture2D tex;
-    private GUIStyle guiStyle = new GUIStyle();
-
+    
     CaptureAndSave snapShot;
 
     void Start()
@@ -60,12 +59,15 @@ public class CaptureScreenShot : MonoBehaviour
             // screenShotPath = screenShotDirectory + screenShotAblumName + "/" + screenShotFilename;
             // Send in Directory path and filename into ScreenShot
             screenShotMger.AccessFileFromDir(msg);
+
         }
     }
 
     public void CaptureSaveToAlbum() {
         // Saves image locally to C:\Users\gwany\Pictures\
+        screenShotMger.ToggleCanvas("off");
         snapShot.CaptureAndSaveToAlbum(ImageType.JPG);
+        // ToggleCanvas("on");
         Debug.Log("Image captured");
         // Saves image on device
         // snapShot.CaptureAndSaveAtPath(System.IO.Path.Combine(Application.persistentDataPath,"Image.jpg"),ImageType.JPG);
@@ -74,4 +76,3 @@ public class CaptureScreenShot : MonoBehaviour
     }
 
 }
-
