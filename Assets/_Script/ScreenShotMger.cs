@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenShotMger : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public class ScreenShotMger : MonoBehaviour {
     private Texture2D newTexture2D;
     private GameObject generalButtons;
     private GameObject screenShotButtons;
+    private GameObject statusBarBkground;
+    private Text statusText;
 
     private void Start()
     {
@@ -46,17 +49,22 @@ public class ScreenShotMger : MonoBehaviour {
 
         // Storing ScreenShotButtons locally
         screenShotButtons = GameObject.FindGameObjectWithTag("ScreenShotButtons");
-        screenShotButtons.SetActive(false);
+        // screenShotButtons.SetActive(false); - For Android
+
+        // Storing Status Bar locally
+        statusBarBkground = GameObject.FindGameObjectWithTag("StatusBarBkground");
+        statusText = GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>();
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.B)) {
-            ShowMenuButtons("general");
+            Debug.Log("IOS Screenshot");
+            StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f));
         }
         if (Input.GetKeyUp(KeyCode.N))
         {
-            ShowMenuButtons("screenshot");
+            StatusBar("scanEnv");
         }
     }
 
@@ -79,7 +87,8 @@ public class ScreenShotMger : MonoBehaviour {
         // This function stores the file path from CaptureScreenShot locally
         filePath = path;
         Debug.Log("Filepath in ScreenShotMger is  " + filePath);
-        ApplyNewTexture(filePath);
+        iOSProcess();
+        // ApplyNewTexture(filePath);  - This works for Android
     }
 
     public void ApplyNewTexture(string filePath) {
@@ -123,6 +132,30 @@ public class ScreenShotMger : MonoBehaviour {
         return tex;
     }
 
+    public void iOSProcess() {
+        ToggleCanvas("on");
+        StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f));
+    }
+
+    public void StatusBar(string state) {
+        if (state == "iosScreenShot")
+        {
+            statusText.text = "Picture saved to your photos!";
+        }
+        else if (state == "scanEnv")
+        {
+            statusText.text = "Scanning your environment";
+
+        }
+        else if (state == "placeObj")
+        {
+            statusText.text = "Tap to place object";
+        }
+        else if (state == "default") {
+            statusText.text = "";
+        }
+    }
+
     public void SwitchCamOn(string cam) {
         // Switch from AR Camera to Screenshot Camera
         if (cam == "ar")
@@ -158,6 +191,24 @@ public class ScreenShotMger : MonoBehaviour {
             screenShotButtons.SetActive(true);
             generalButtons.SetActive(false);            
         }
+    }
+
+    IEnumerator FadeStatusBackground(float aValue, float aTime, string status, float delay)
+    {
+        float alpha = statusBarBkground.GetComponent<RawImage>().color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+            statusBarBkground.GetComponent<RawImage>().color = newColor;
+            yield return null;
+        }
+        StatusBar(status);
+
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Delay 5 seconds");
+        Color zeroAlpha = new Color(1, 1, 1, 0);
+        statusBarBkground.GetComponent<RawImage>().color = zeroAlpha;
+        StatusBar("default");
     }
 
 }

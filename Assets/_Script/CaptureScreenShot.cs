@@ -16,10 +16,6 @@ public class CaptureScreenShot : MonoBehaviour
     private string screenShotDirectory;
     private string screenShotAblumName;
     private string screenShotFilename;
-    public Texture2D tex1;
-	public Texture2D tex2;
-	public Texture2D tex3;
-	public Texture2D tex4;
     
     CaptureAndSave snapShot;
 
