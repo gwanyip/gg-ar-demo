@@ -60,7 +60,7 @@ public class ScreenShotMger : MonoBehaviour {
     {
         if (Input.GetKeyUp(KeyCode.B)) {
             Debug.Log("IOS Screenshot");
-            StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f));
+            StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f, false));
         }
         if (Input.GetKeyUp(KeyCode.N))
         {
@@ -134,7 +134,7 @@ public class ScreenShotMger : MonoBehaviour {
 
     public void iOSProcess() {
         ToggleCanvas("on");
-        StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f));
+        StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f, false));
     }
 
     public void StatusBar(string state) {
@@ -193,7 +193,7 @@ public class ScreenShotMger : MonoBehaviour {
         }
     }
 
-    IEnumerator FadeStatusBackground(float aValue, float aTime, string status, float delay)
+    public IEnumerator FadeStatusBackground(float aValue, float aTime, string status, float delay, bool remain)
     {
         float alpha = statusBarBkground.GetComponent<RawImage>().color.a;
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
@@ -206,9 +206,11 @@ public class ScreenShotMger : MonoBehaviour {
 
         yield return new WaitForSeconds(delay);
         Debug.Log("Delay 5 seconds");
-        Color zeroAlpha = new Color(1, 1, 1, 0);
-        statusBarBkground.GetComponent<RawImage>().color = zeroAlpha;
-        StatusBar("default");
+        if(!remain){
+			Color zeroAlpha = new Color(1, 1, 1, 0);
+			statusBarBkground.GetComponent<RawImage>().color = zeroAlpha;
+			StatusBar("default");    
+        }
     }
 
 }

@@ -12,6 +12,7 @@ TagManager:
   - StatusBar
   - StatusText
   - StatusBarBkground
+  - SceneMger
   layers:
   - Default
   - TransparentFX

@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/01_SplashScreen.unity
     guid: 903859ceff6f65942bc4f9fdbdc0c339
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/02_CatList.unity
     guid: 7642c627d6dfaae40a459c44c977e021
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/03_ProdPage.unity
     guid: 33aacdcca4a9d1d45a913195c2b295cc
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/04_ARKitProdDemo.unity
     guid: a869b071cc1da4b9a95fce44a7e0d807
   - enabled: 1
