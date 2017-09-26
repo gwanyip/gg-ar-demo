@@ -97,7 +97,7 @@ public class NativeShare : MonoBehaviour
             {
                 isProcessing = true;
                 string screenShotPath = screenShot.filePath;;
-				ScreenCapture.CaptureScreenshot("screenshot.png");
+				ScreenCapture.CaptureScreenshot("ScreenShot.png");
                 yield return new WaitForSeconds(1f);
                 // Game.instance.showLoading ();
                 CallSocialShareAdvanced(ShareMessage, subject, url, screenShotPath);

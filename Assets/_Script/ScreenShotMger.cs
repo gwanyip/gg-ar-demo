@@ -6,9 +6,7 @@ using UnityEngine;
 public class ScreenShotMger : MonoBehaviour {
 
     public string filePath;    
-    public Texture2D newTexture2D;
     public GameObject planePrefab;
-    public GameObject screenShot;
     public Camera screenShotcam;
     public Camera arCam;
 
@@ -17,6 +15,10 @@ public class ScreenShotMger : MonoBehaviour {
     private GameObject screenShotCamGO;
     private GameObject arCameGO;
     private Canvas uiCanvas;
+    private GameObject screenShot;
+    private Texture2D newTexture2D;
+    private GameObject generalButtons;
+    private GameObject screenShotButtons;
 
     private void Start()
     {
@@ -39,12 +41,22 @@ public class ScreenShotMger : MonoBehaviour {
         // Storing NativeShare locally
         nativeShare = GameObject.FindObjectOfType<NativeShare>();
 
+        // Storing GeneralButtons locally
+        generalButtons = GameObject.FindGameObjectWithTag("GeneralButtons");
+
+        // Storing ScreenShotButtons locally
+        screenShotButtons = GameObject.FindGameObjectWithTag("ScreenShotButtons");
+        screenShotButtons.SetActive(false);
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.B)) {
-            ToggleCanvas("on");
+            ShowMenuButtons("general");
+        }
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            ShowMenuButtons("screenshot");
         }
     }
 
@@ -59,6 +71,7 @@ public class ScreenShotMger : MonoBehaviour {
     public void DestroyScreenShot() {
         Destroy(screenShot);
         SwitchCamOn("ar");
+        ShowMenuButtons("general");
     }
 
     public void AccessFileFromDir(string path)
@@ -70,6 +83,9 @@ public class ScreenShotMger : MonoBehaviour {
     }
 
     public void ApplyNewTexture(string filePath) {
+        // Managing menu state and visibility
+        ToggleCanvas("on");
+        ShowMenuButtons("screenshot");
         // Calculating screen size for texture plane
         float height = (screenShotcam.orthographicSize * 2.0f) / 10f;
         float width = height * Screen.width / Screen.height;
@@ -129,6 +145,18 @@ public class ScreenShotMger : MonoBehaviour {
         else if (state == "off")
         {
             uiCanvas.enabled = false;
+        }
+    }
+
+    public void ShowMenuButtons(string menu) {
+        if (menu == "general") {
+            Debug.Log("Show general menu");
+            generalButtons.SetActive(true);
+            screenShotButtons.SetActive(false);
+        } else if (menu == "screenshot") {
+            Debug.Log("Show screenshot menu");
+            screenShotButtons.SetActive(true);
+            generalButtons.SetActive(false);            
         }
     }
 
