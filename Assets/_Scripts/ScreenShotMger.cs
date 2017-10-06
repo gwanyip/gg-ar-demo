@@ -1,12 +1,14 @@
 ﻿using System.Collections;
+using System.IO;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenShotMger : MonoBehaviour {
+public class ScreenShotMger : MonoBehaviour
+{
 
-    public string filePath;    
+    public string filePath;
     public GameObject planePrefab;
     public Camera screenShotcam;
     public Camera arCam;
@@ -49,16 +51,17 @@ public class ScreenShotMger : MonoBehaviour {
 
         // Storing ScreenShotButtons locally
         screenShotButtons = GameObject.FindGameObjectWithTag("ScreenShotButtons");
-        screenShotButtons.SetActive(false); 
+        screenShotButtons.SetActive(false);
 
-      // Storing Status Bar locally
-      statusBarBkground = GameObject.FindGameObjectWithTag("StatusBarBkground");
+        // Storing Status Bar locally
+        statusBarBkground = GameObject.FindGameObjectWithTag("StatusBarBkground");
         statusText = GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B)) {
+        if (Input.GetKeyUp(KeyCode.B))
+        {
             Debug.Log("IOS Screenshot");
             StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f, false));
         }
@@ -68,15 +71,20 @@ public class ScreenShotMger : MonoBehaviour {
         }
     }
 
-    public void TakeScreenShot() {
+    public void TakeScreenShot()
+    {
         captureScreenShot.CaptureSaveToAlbum();
     }
 
-    public void ShareScreenShot() {
+    public void ShareScreenShot()
+    {
+        filePath = Application.persistentDataPath+"/temp.PNG";
+        captureScreenShot.SaveTextureAtPath(newTexture2D, filePath, ImageType.PNG);
         nativeShare.Share();
     }
 
-    public void DestroyScreenShot() {
+    public void DestroyScreenShot()
+    {
         Destroy(screenShot);
         SwitchCamOn("ar");
         ShowMenuButtons("general");
@@ -94,7 +102,8 @@ public class ScreenShotMger : MonoBehaviour {
         // ApplyNewTexture(filePath);  - This works for Android
     }
 
-    public void ApplyNewTexture(string filePath) {
+    public void ApplyNewTexture(string filePath)
+    {
         // Managing menu state and visibility
         ToggleCanvas("on");
         ShowMenuButtons("screenshot");
@@ -127,6 +136,7 @@ public class ScreenShotMger : MonoBehaviour {
 
     public void SaveTex()
     {
+
         captureScreenShot.SaveTextureToGallery(newTexture2D, ImageType.PNG);
     }
     public void ApplyNewTexture(Texture2D tex2d)
@@ -171,12 +181,14 @@ public class ScreenShotMger : MonoBehaviour {
         return tex;
     }
 
-    public void iOSProcess() {
+    public void iOSProcess()
+    {
         ToggleCanvas("on");
         StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f, false));
     }
 
-    public void StatusBar(string state) {
+    public void StatusBar(string state)
+    {
         if (state == "iosScreenShot")
         {
             statusText.text = "Picture saved to your photos!";
@@ -190,19 +202,22 @@ public class ScreenShotMger : MonoBehaviour {
         {
             statusText.text = "Tap to place object";
         }
-        else if (state == "default") {
+        else if (state == "default")
+        {
             statusText.text = "";
         }
     }
 
-    public void SwitchCamOn(string cam) {
+    public void SwitchCamOn(string cam)
+    {
         // Switch from AR Camera to Screenshot Camera
         if (cam == "ar")
         {
             arCam.enabled = true;
             screenShotcam.enabled = false;
         }
-        else if (cam == "shot") {
+        else if (cam == "shot")
+        {
             arCam.enabled = false;
             screenShotcam.enabled = true;
         }
@@ -220,15 +235,19 @@ public class ScreenShotMger : MonoBehaviour {
         }
     }
 
-    public void ShowMenuButtons(string menu) {
-        if (menu == "general") {
+    public void ShowMenuButtons(string menu)
+    {
+        if (menu == "general")
+        {
             Debug.Log("Show general menu");
             generalButtons.SetActive(true);
             screenShotButtons.SetActive(false);
-        } else if (menu == "screenshot") {
+        }
+        else if (menu == "screenshot")
+        {
             Debug.Log("Show screenshot menu");
             screenShotButtons.SetActive(true);
-            generalButtons.SetActive(false);            
+            generalButtons.SetActive(false);
         }
     }
 
@@ -245,10 +264,11 @@ public class ScreenShotMger : MonoBehaviour {
 
         yield return new WaitForSeconds(delay);
         Debug.Log("Delay 5 seconds");
-        if(!remain){
-			Color zeroAlpha = new Color(1, 1, 1, 0);
-			statusBarBkground.GetComponent<RawImage>().color = zeroAlpha;
-			StatusBar("default");    
+        if (!remain)
+        {
+            Color zeroAlpha = new Color(1, 1, 1, 0);
+            statusBarBkground.GetComponent<RawImage>().color = zeroAlpha;
+            StatusBar("default");
         }
     }
 

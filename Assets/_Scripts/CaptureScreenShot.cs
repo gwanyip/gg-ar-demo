@@ -67,9 +67,15 @@ public class CaptureScreenShot : MonoBehaviour
         return snapShot.GetScreenShot(Width, Height, cam, Itype);
 
     }
+    public void SaveTextureAtPath(Texture2D tex2D, string path, ImageType imgType)
+    {
+        snapShot.SaveTextureAtPath(tex2D, path, imgType);
+
+    }
     public void SaveTextureToGallery(Texture2D tex, ImageType Itype)
     {
         snapShot.SaveTextureToGallery(tex, Itype);
+        
 
     }
     public void CaptureToTexture()
