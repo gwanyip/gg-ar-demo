@@ -11,6 +11,8 @@ public class CaptureScreenShot : MonoBehaviour
     string height = "0";
     string log = "Log";
 
+
+    public Texture2D tex;
     private ScreenShotMger screenShotMger;
     private string screenShotPath;
     private string screenShotDirectory;
@@ -59,6 +61,16 @@ public class CaptureScreenShot : MonoBehaviour
 			Debug.Log (msg);
 
         }
+    }
+    public Texture2D GetScreenShot(int Width, int Height, Camera cam, ImageType Itype)
+    {
+        return snapShot.GetScreenShot(Width, Height, cam, Itype);
+
+    }
+    public void SaveTextureToGallery(Texture2D tex, ImageType Itype)
+    {
+        snapShot.SaveTextureToGallery(tex, Itype);
+
     }
     public void CaptureToTexture()
     {

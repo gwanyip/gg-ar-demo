@@ -19,7 +19,7 @@ public class ScreenShotMger : MonoBehaviour {
     private GameObject screenShot;
     private Texture2D newTexture2D;
     private GameObject generalButtons;
-    private GameObject screenShotButtons;
+    public GameObject screenShotButtons;
     private GameObject statusBarBkground;
     private Text statusText;
 
@@ -49,10 +49,10 @@ public class ScreenShotMger : MonoBehaviour {
 
         // Storing ScreenShotButtons locally
         screenShotButtons = GameObject.FindGameObjectWithTag("ScreenShotButtons");
-        // screenShotButtons.SetActive(false); - For Android
+        screenShotButtons.SetActive(false); 
 
-        // Storing Status Bar locally
-        statusBarBkground = GameObject.FindGameObjectWithTag("StatusBarBkground");
+      // Storing Status Bar locally
+      statusBarBkground = GameObject.FindGameObjectWithTag("StatusBarBkground");
         statusText = GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>();
     }
 
@@ -105,6 +105,42 @@ public class ScreenShotMger : MonoBehaviour {
         Debug.Log("In ApplyNewTexture, filePath is " + filePath);
         // Loading image to texture
         newTexture2D = LoadPNG(filePath);
+
+        // Switch shot cam on
+        SwitchCamOn("shot");
+
+        // Instantiating plane screenshot prefab
+        screenShot = Instantiate(planePrefab, screenShotcam.transform.position + screenShotcam.transform.forward * 0.5f, Quaternion.Euler(90, -180, 0));
+        // Updating size of plane to fit camera size
+        screenShot.transform.localScale = new Vector3(width, 1f, height);
+        // Applying new texture to instantiated prefab main texture
+        screenShot.GetComponent<Renderer>().material.mainTexture = newTexture2D;
+        // Applying image to new texture
+        newTexture2D.Apply();
+    }
+    public void IntiateScreenShotTex2d()
+    {
+        Texture2D tex = captureScreenShot.GetScreenShot(Screen.width, Screen.height, Camera.main, ImageType.PNG);
+        ApplyNewTexture(tex);
+
+    }
+
+    public void SaveTex()
+    {
+        captureScreenShot.SaveTextureToGallery(newTexture2D, ImageType.PNG);
+    }
+    public void ApplyNewTexture(Texture2D tex2d)
+    {
+        // Managing menu state and visibility
+        ToggleCanvas("on");
+        ShowMenuButtons("screenshot");
+        // Calculating screen size for texture plane
+        float height = (screenShotcam.orthographicSize * 2.0f) / 10f;
+        float width = height * Screen.width / Screen.height;
+
+        Debug.Log("In ApplyNewTexture, filePath is " + filePath);
+        // Loading image to texture
+        newTexture2D = tex2d;
 
         // Switch shot cam on
         SwitchCamOn("shot");
