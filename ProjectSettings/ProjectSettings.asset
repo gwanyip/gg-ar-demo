@@ -218,8 +218,8 @@ PlayerSettings:
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/codeandcraft/Desktop/VR/Projects/gg-ar-demo/user.keystore
+  AndroidKeyaliasName: mehedi
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   androidEnableBanner: 1
