@@ -96,7 +96,7 @@ public class NativeShare : MonoBehaviour
             IEnumerator CallSocialShareRoutine()
             {
                 isProcessing = true;
-                string screenShotPath = screenShot.filePath;;
+                string screenShotPath = screenShot.filePath;
 				ScreenCapture.CaptureScreenshot("ScreenShot.png");
                 yield return new WaitForSeconds(1f);
                 // Game.instance.showLoading ();

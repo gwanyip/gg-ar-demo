@@ -81,7 +81,10 @@ public class ScreenShotMger : MonoBehaviour {
         SwitchCamOn("ar");
         ShowMenuButtons("general");
     }
-
+    public void ScreenShot2DTexture()
+    {
+        captureScreenShot.CaptureToTexture();
+    }
     public void AccessFileFromDir(string path)
     {
         // This function stores the file path from CaptureScreenShot locally

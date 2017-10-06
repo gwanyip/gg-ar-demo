@@ -60,7 +60,12 @@ public class CaptureScreenShot : MonoBehaviour
 
         }
     }
-
+    public void CaptureToTexture()
+    {
+        screenShotMger.ToggleCanvas("off");
+        Texture2D tex = snapShot.GetScreenShot(Screen.width, Screen.height, Camera.main, ImageType.PNG);
+        snapShot.SaveTextureToGallery(tex, ImageType.PNG);
+    }
     public void CaptureSaveToAlbum() {
         // Saves image locally to C:\Users\gwany\Pictures\
         screenShotMger.ToggleCanvas("off");
