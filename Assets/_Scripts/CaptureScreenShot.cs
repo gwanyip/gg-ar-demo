@@ -34,14 +34,14 @@ public class CaptureScreenShot : MonoBehaviour
 
     void OnEnable()
     {
-        CaptureAndSaveEventListener.onError += OnError;
-        CaptureAndSaveEventListener.onSuccess += OnSuccess;
+        //CaptureAndSaveEventListener.onError += OnError;
+        //CaptureAndSaveEventListener.onSuccess += OnSuccess;
     }
 
     void OnDisable()
     {
-        CaptureAndSaveEventListener.onError += OnError;
-        CaptureAndSaveEventListener.onSuccess += OnSuccess;
+        //CaptureAndSaveEventListener.onError += OnError;
+        //CaptureAndSaveEventListener.onSuccess += OnSuccess;
     }
 
     void OnError(string error)
