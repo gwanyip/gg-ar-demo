@@ -25,6 +25,8 @@ public class ScreenShotMger : MonoBehaviour
     private GameObject statusBarBkground;
     private Text statusText;
 
+
+#region Monobehavior Functions
     private void Start()
     {
         // Getting Shot Camera locally
@@ -71,6 +73,10 @@ public class ScreenShotMger : MonoBehaviour
         }
     }
 
+    #endregion
+
+
+
     public void TakeScreenShot()
     {
         captureScreenShot.CaptureSaveToAlbum();
@@ -98,43 +104,20 @@ public class ScreenShotMger : MonoBehaviour
         // This function stores the file path from CaptureScreenShot locally
         filePath = path;
         Debug.Log("Filepath in ScreenShotMger is  " + filePath);
-        iOSProcess();
         // ApplyNewTexture(filePath);  - This works for Android
     }
 
-    public void ApplyNewTexture(string filePath)
-    {
-        // Managing menu state and visibility
-        ToggleCanvas("on");
-        ShowMenuButtons("screenshot");
-        // Calculating screen size for texture plane
-        float height = (screenShotcam.orthographicSize * 2.0f) / 10f;
-        float width = height * Screen.width / Screen.height;
 
-        Debug.Log("In ApplyNewTexture, filePath is " + filePath);
-        // Loading image to texture
-        newTexture2D = LoadPNG(filePath);
-
-        // Switch shot cam on
-        SwitchCamOn("shot");
-
-        // Instantiating plane screenshot prefab
-        screenShot = Instantiate(planePrefab, screenShotcam.transform.position + screenShotcam.transform.forward * 0.5f, Quaternion.Euler(90, -180, 0));
-        // Updating size of plane to fit camera size
-        screenShot.transform.localScale = new Vector3(width, 1f, height);
-        // Applying new texture to instantiated prefab main texture
-        screenShot.GetComponent<Renderer>().material.mainTexture = newTexture2D;
-        // Applying image to new texture
-        newTexture2D.Apply();
-    }
+    
+    //Function for "Take Picture" button
     public void IntiateScreenShotTex2d()
     {
         Texture2D tex = captureScreenShot.GetScreenShot(Screen.width, Screen.height, Camera.main, ImageType.PNG);
         ApplyNewTexture(tex);
 
     }
-
-    public void SaveTex()
+    //Function for "Save Button"
+    public void SaveTextureToGallery()
     {
 
         captureScreenShot.SaveTextureToGallery(newTexture2D, ImageType.PNG);
@@ -181,11 +164,7 @@ public class ScreenShotMger : MonoBehaviour
         return tex;
     }
 
-    public void iOSProcess()
-    {
-        ToggleCanvas("on");
-        StartCoroutine(FadeStatusBackground(0.7f, 0.5f, "iosScreenShot", 3f, false));
-    }
+   
 
     public void StatusBar(string state)
     {
